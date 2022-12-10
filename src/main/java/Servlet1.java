@@ -14,7 +14,7 @@ import java.sql.*;
 /**
  * Servlet implementation class Servlet1
  */
-@WebServlet("/Servlet1")
+@WebServlet("/BookRentalServlet")
 public class Servlet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -33,31 +33,12 @@ public class Servlet1 extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		
-		PrintWriter out = response.getWriter();
-		String id = request.getParameter("id");
-		out.print("<h1>Display the record</h1>");
-		out.print("<table border='1'><tr><th>Id</th><th>Name</th><th>Address</th></tr>");
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","root");
-			
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from t12 where id = "+id+"");
-			while(rs.next()) {
-				out.print("<tr><td>");
-				out.print(rs.getInt(1));
-				out.print("</td>");
-				out.print("<td>");
-				out.print(rs.getString(2));
-				out.print("</td>");
-				out.print("<tr>");
-				
-			}
-			
-		}catch(Exception p) {
-			System.out.println(p);
-		}
-		out.print("</table>");
+		
+		String bkName = request.getParameter("bkName");
+		//System.out.println(bkName);
+		request.setAttribute("bkName", bkName); // This will be available as ${id}
+		request.getRequestDispatcher("BookDetail.jsp").forward(request, response);
+		
 	}
 
 	/**

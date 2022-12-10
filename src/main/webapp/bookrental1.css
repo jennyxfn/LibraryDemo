@@ -1,14 +1,13 @@
-
-.mainreg {
+.mainbook {
     background-color: #FFFFFF;
-    width: 600px;
-    height: 1200px;
-    margin: 6em auto;
+    width: 400px;
+    height: 500px;
+    margin: 3em auto;
     border-radius: 1.5em;
     box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
 }
 
-.register {
+.bookrental {
     padding-top: 40px;
     color: #8C55AA;
     font-family: 'Ubuntu', sans-serif;
@@ -16,31 +15,31 @@
     font-size: 23px;
 }
 
-form.form2 {
+form.form3 {
     padding-top: 30px;
-}
+	}
 
-.unreg {
-    width: 76%;
-    color: rgb(38, 50, 56);
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 1px;
-    background: rgba(136, 126, 126, 0.04);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    outline: none;
-    box-sizing: border-box;
-    border: 2px solid rgba(0, 0, 0, 0.02);
-    margin-bottom: 50px;
-    margin-left: 70px;
-    text-align: center;
-    margin-bottom: 27px;
-    font-family: 'Ubuntu', sans-serif;
-    }
-
-.submitreg {
+.unbook {
+	width: 76%;
+	color: rgb(38, 50, 56);
+	font-weight: 700;
+	font-size: 14px;
+	letter-spacing: 1px;
+	background: rgba(136, 126, 126, 0.04);
+	padding: 10px 20px;
+	border: none;
+	border-radius: 20px;
+	outline: none;
+	box-sizing: border-box;
+	border: 2px solid rgba(0, 0, 0, 0.02);
+	margin-bottom: 50px;
+	margin-left: 46px;
+	text-align: center;
+	margin-bottom: 27px;
+	font-family: 'Ubuntu', sans-serif;
+	}
+    
+.submitbook {
     cursor: pointer;
     border-radius: 5em;
     color: #fff;
@@ -51,12 +50,12 @@ form.form2 {
     padding-bottom: 10px;
     padding-top: 10px;
     font-family: 'Ubuntu', sans-serif;
-    margin-left: 40%;
+    margin-left: 35%;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
     }
 
-.backreg {
+.backbook {
     cursor: pointer;
     border-radius: 5em;
     color: #fff;
@@ -67,7 +66,7 @@ form.form2 {
     padding-bottom: 10px;
     padding-top: 10px;
     font-family: 'Ubuntu', sans-serif;
-    margin-left: 41.5%;
+    margin-left: 36.5%;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
     }

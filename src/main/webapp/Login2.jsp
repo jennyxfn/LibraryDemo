@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    
 <html>
 
 <head>
@@ -11,10 +14,10 @@
 <body>
   <div class="main">
     <p class="sign" align="center">Sign in</p>
-    <form class="form1" method="post" action="SignInServlet">
-      <input class="un " type="text" name = "userEmail" align="center" placeholder="Email">
-      <input class="pass" type="password" name="userPassword" align="center" placeholder="Password">
-      <select class="pass" name="userType" id="users">
+    <form class="form1" action="SignInServlet" method="post" >
+      <input class="un " type="text" name = "username" align="center" placeholder="Email">
+      <input class="pass" type="password" name="password" align="center" placeholder="Password">
+      <select class="pass" name="usertype">
         <option value="admin">Admin</option>
         <option value="customer">Customer</option>
       </select>
