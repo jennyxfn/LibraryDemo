@@ -26,41 +26,45 @@
         <td>Book Status</td>
    </tr>
    <tr>
-   <% 
-   		String url = "jdbc:mysql://localhost:3306/project1";
-   		String username = "root";
-   		String password = "971228";
-   		String sql = ("SELECT book.book_id,book_name,topics_name,authors_lname,book_status "+ 
-   				      "FROM project1.book book "+
-   				      "left join book_author ba "+
-   				      "on book.book_id = ba.book_id "+
-   				      "left join author a "+
-   				      "on ba.authors_id = a.authors_id "+
-   				      "left join topic t "+
-   				      "on t.topics_id = book.topics_id ");
-   		Class.forName("com.mysql.jdbc.Driver");
-   		Connection con= DriverManager.getConnection(url,username,password);
-   		Statement st = con.createStatement();
-   		ResultSet rs = st.executeQuery(sql);
-   		//rs.next();
+   	<%@ page import ="java.util.ArrayList"%>
+	<%@ page import ="java.util.List"%>
+	<%@ page import = "java.util.Iterator"%>
+	<%@ page import = "BookRental.BookBean"%>
+   <% 	
+   		ArrayList<BookBean> rows = new ArrayList();
+   		rows = (ArrayList)request.getAttribute("Rows");
+   		//rows = rows.get(0);
+   		//rows.toArray();
    %>
 
-   <% while(rs.next()) {
-    out.print("<tr><td>");
-    out.print(rs.getString(1));
-    out.print("</td>");
-    out.print("<td>");
-    out.print(rs.getString(2));
-    out.print("</td>");
-    out.print("<td>");
-    out.print(rs.getString(3));
-    out.print("</td>");
-    out.print("<td>");
-    out.print(rs.getString(4));
-    out.print("</td>");
-    out.print("<td>");
-    out.print(rs.getString(5));
-    out.print("</td></tr>");}%>
+   <% 
+    Iterator i = rows.iterator();
+    //out.print(rows.get(0).getBkid());
+    //out.print(rows.get(0).getBkname());
+    //out.print(rows.get(0).getBktopic());
+    //out.print(rows.get(0).getBkauthor());
+    //out.print(rows.get(0).getBkstatus());
+   int counter = 0;
+   	while(i.hasNext()){
+   	    out.print("<tr><td>");
+   	    out.print(rows.get(counter).getBkid());
+   	    out.print("</td>");
+   	    out.print("<td>");
+   	    out.print(rows.get(counter).getBkname());
+   	    out.print("</td>");
+   	    out.print("<td>");
+   	    out.print(rows.get(counter).getBktopic());
+   	    out.print("</td>");
+   	    out.print("<td>");
+   	    out.print(rows.get(counter).getBkauthor());
+   	    out.print("</td>");
+   	    out.print("<td>");
+   	    out.print(rows.get(counter).getBkstatus());
+   	    out.print("</tr>");
+   	    i.next();
+   	 	counter++;
+   	}
+    %>
     
 
    </tr>

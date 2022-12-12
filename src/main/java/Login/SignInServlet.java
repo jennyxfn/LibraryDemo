@@ -62,6 +62,7 @@ public class SignInServlet extends HttpServlet {
 		System.out.println("User name is: "+ username);
 		System.out.println("User password is: "+ password);
 		System.out.println("User type is: "+ usertype);
+		
 		LoginBean loginBean = new LoginBean();
 		loginBean.setUsername(username);
 		loginBean.setPassword(password);
