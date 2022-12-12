@@ -2,7 +2,7 @@
 
 <head>
   <link rel="stylesheet" href="./base.css">
-  <link rel="stylesheet" href="./bookrental.css">
+  <link rel="stylesheet" href="./bookrental1.css">
   <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
@@ -12,7 +12,20 @@
 <body>
   <div class="mainbook">
     <p class="bookrental" align="center">Online Book Rental</p>
-               
+    <form class="form3" method="post" action="BookRentalServlet">
+    	<input class="unbook" type="text" name="bkName" align="center" placeholder="Book Name">
+    	<input class="unbook" type="text" name="bkAuthor" align="center" placeholder="Author">
+    	<input class="unbook" type="text" name="bkTopic" align="center" placeholder="Topic">
+    	<button class="submitbook" align="center">Submit</button>
+    	<br/>
+    	<br/>
+    	
+    </form>
+    <form>
+    
+    	<button class="backbook" formaction="main%20menu.html" align="center">Back</button>
+    
+    </form>          
     </div>
      
 </body>
