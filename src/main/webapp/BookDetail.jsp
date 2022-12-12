@@ -15,7 +15,7 @@
 <body>
   <div class="mainbook">
     <br/>
-  	<a class="insert">Insert</a>
+  	<a href="insertbook.html" class="insert"  >Insert</a>
     <p class="bookrental" align="center">Book Detail</p>
     <table border="2" align="center">
    <tr>
