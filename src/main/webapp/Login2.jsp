@@ -26,7 +26,7 @@
       <br/>
       <br/>
       <br/>
-      <a href="http://localhost:8081/LibraryDemo/Register.html" class="submit" align="center">Sign up</a>
+      <a href="Register.html" class="submit" align="center">Sign up</a>
       <p class="forgot" align="center"><a href="#">Forgot Password?</p>
      </form>
             

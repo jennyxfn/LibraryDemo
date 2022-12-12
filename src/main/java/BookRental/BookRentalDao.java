@@ -135,8 +135,8 @@ public class BookRentalDao {
 	//not finish
 	public boolean rentBook(BookBean book) throws SQLException {
         boolean rowUpdated;
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
-            statement.setString(1, book.getName());
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(RENT_BOOKS_SQL);) {
+            statement.setString(1, book.getBkid());
             statement.setString(2, book.getEmail());
             statement.setString(3, book.getCountry());
             statement.setInt(4, book.getId());
