@@ -13,9 +13,7 @@
 <body>
   <div class="mainbook">
     <p class="bookrental" align="center">Online Book Rental</p>
-    <form class="form3" method="post" action="BookRentalServlet">
-    	<input class="unbook" type="datetime-local" name="returndate" value="2022-12-12T00:00" align="center" placeholder="Return Date">
-    	<%
+    <%
 		    String bkId = request.getParameter("bkid");
     		String userId = request.getParameter("userId");
     		String userType = request.getParameter("userType");
@@ -25,9 +23,12 @@
     		
     	
 		%>
-		<input type="hidden" name="BookId" value="${bkId}" />
-    	<input type="hidden" name="UserId" value="${userId}" />
-    	<input type="hidden" name="UserType" value="${userType}" />
+    <form class="form3" method="post" action="rent">
+    	<input class="unbook" type="datetime-local" name="returndate" value="2022-12-12T00:00" align="center" placeholder="Return Date">
+    	
+		<input type="hidden" name="bkId" value=<%=bkId%> >
+    	<input type="hidden" name="userId" value=<%=userId%> >
+    	<input type="hidden" name="userType" value=<%=userType%> >
     	
     	<button class="submitbook" align="center">Submit</button>
     	<br/>

@@ -23,7 +23,7 @@ import BookRental.BookRentalDao;
 /**
  * Servlet implementation class Servlet1
  */
-@WebServlet("/BookRentalServlet")
+@WebServlet("/")
 public class BookRentalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BookRentalDao bookRentalDao;  
@@ -65,7 +65,7 @@ public class BookRentalServlet extends HttpServlet {
 		
 	    try {
             switch (action) {
-                case "/Book%20Rental":
+                case "/BookRental":
                 	searchBook(request, response);
                 	System.out.println("from book rental");
                     break;
@@ -97,10 +97,13 @@ public class BookRentalServlet extends HttpServlet {
 	private void rentBook(HttpServletRequest request, HttpServletResponse response)
 		    throws SQLException, IOException {
 				String returnDate = request.getParameter("returndate");
-		        String bookId = request.getParameter("BookId");
-				String userId = request.getParameter("UserId");
-				String userType = request.getParameter("UserType");
-		       
+		        String bookId = request.getParameter("bkId");
+				String userId = request.getParameter("userId");
+				String userType = request.getParameter("userType");
+				
+				System.out.println("data in query listed below: ");
+				System.out.println(returnDate + "; "+bookId+ "; "+userId+"; "+userType);
+				
 
 		        //User book = new User(id, name, email, country);
 		        bookRentalDao.rentBook(returnDate, bookId, userId);
