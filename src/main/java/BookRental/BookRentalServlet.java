@@ -23,7 +23,7 @@ import BookRental.BookRentalDao;
 /**
  * Servlet implementation class Servlet1
  */
-@WebServlet("/")
+@WebServlet("/BookRentalServlet")
 public class BookRentalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BookRentalDao bookRentalDao;  
@@ -65,7 +65,7 @@ public class BookRentalServlet extends HttpServlet {
 		
 	    try {
             switch (action) {
-                case "/BookRental":
+                case "/Book%20Rental":
                 	searchBook(request, response);
                     break;
                 case "/rent":
@@ -93,6 +93,7 @@ public class BookRentalServlet extends HttpServlet {
 		    throws SQLException, IOException {
 <<<<<<< HEAD
 				String returnDate = request.getParameter("returndate");
+<<<<<<< HEAD
 		        String bookId = request.getParameter("bkId");
 				String userId = request.getParameter("userId");
 				String userType = request.getParameter("userType");
@@ -107,6 +108,12 @@ public class BookRentalServlet extends HttpServlet {
 //		        String email = request.getParameter("email");
 //		        String country = request.getParameter("country");
 >>>>>>> parent of de89cb1 (able to pass userid to anywhere)
+=======
+		        String bookId = request.getParameter("BookId");
+				String userId = request.getParameter("UserId");
+				String userType = request.getParameter("UserType");
+		       
+>>>>>>> parent of dbee788 (Rent function done)
 
 		        //User book = new User(id, name, email, country);
 		        bookRentalDao.rentBook(book,user);

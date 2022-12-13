@@ -23,7 +23,7 @@
     %>
     <%session.setAttribute("loginBean", loginBean); %>
     <%request.setAttribute("loginBean", loginBean); %>
-    <form class="form3" method="post" action="BookRental">
+    <form class="form3" method="post" action="BookRentalServlet">
     	<input class="unbook" type="text" name="bkName" align="center" placeholder="Book Name">
     	<input class="unbook" type="text" name="bkAuthor" align="center" placeholder="Author">
     	<input class="unbook" type="text" name="bkTopic" align="center" placeholder="Topic">

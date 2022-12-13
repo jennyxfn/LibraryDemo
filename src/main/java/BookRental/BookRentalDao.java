@@ -36,7 +36,7 @@ public class BookRentalDao {
     
     //INSERT in rental table
     private static final String RENT_BOOKS_SQL = "insert into rental "
-    		+ "values ((select * from (select (max(rental_id)+1) from rental)a),'Borrowed',current_timestamp(),?,null,?,?)";
+    		+ "values ((select max(rental_id) from rental)+1,'Borrowed',current_timestamp(),?,null,?,?)";
     
   //Update book status
     private static final String UPDATE_BOOKS_SQL = "update book set book_status = 'NotA' "
