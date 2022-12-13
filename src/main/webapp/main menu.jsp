@@ -1,11 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
 <html>
-
 <head>
+<meta charset="ISO-8859-1">
   <link rel="stylesheet" href="./base.css">
   <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-  <title>Main Menu</title>
+<title>Main Menu</title>
 </head>
 
 <body>
@@ -14,8 +16,22 @@
     <a href="Login2.jsp" class="logout">log out</a>
     <p class="sign" align="center">Menu</p>
     <form class="form1">
+    <%@ page import ="java.util.ArrayList"%>
+	<%@ page import ="java.util.List"%>
+	<%@ page import = "java.util.Iterator"%>
+	<%@ page import = "Login.LoginBean"%>
+    <%
+    	
+    	LoginBean loginBean = (LoginBean)request.getAttribute("loginBean");
+    	
+    %>
+    	
+    
     <div class="button-center">
-        <button class="submitmenu" formaction="http://localhost:8081/LibraryDemo/Book%20Rental.html" align="center">Online Book Rental</button>
+    	<%session.setAttribute("loginBean", loginBean); %>
+    	
+        <button class="submitmenu" formaction = "BookRental.jsp" align="center">Online Book Rental</button>
+        
         <br/>
         <br/>
         <br/>

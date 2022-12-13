@@ -1,17 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
 <html>
 
 <head>
-  <link rel="stylesheet" href="./base.css">
+<link rel="stylesheet" href="./base.css">
   <link rel="stylesheet" href="./bookrental1.css">
   <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-  <title>Online Book Rental</title>
+<meta charset="ISO-8859-1">
+<title>Online Book Rental</title>
 </head>
 
 <body>
   <div class="mainbook">
     <p class="bookrental" align="center">Online Book Rental</p>
+    <%@ page import = "Login.LoginBean"%>
+    <%
+    LoginBean loginBean = (LoginBean)session.getAttribute("loginBean");
+    //out.print(loginBean.getUserid());
+    
+    %>
+    <%session.setAttribute("loginBean", loginBean); %>
+    <%request.setAttribute("loginBean", loginBean); %>
     <form class="form3" method="post" action="BookRentalServlet">
     	<input class="unbook" type="text" name="bkName" align="center" placeholder="Book Name">
     	<input class="unbook" type="text" name="bkAuthor" align="center" placeholder="Author">
@@ -23,7 +34,7 @@
     </form>
     <form>
     
-    	<button class="backbook" formaction="main%20menu.html" align="center">Back</button>
+    	<button class="backbook" formaction="main menu.jsp" align="center">Back</button>
     
     </form>          
     </div>

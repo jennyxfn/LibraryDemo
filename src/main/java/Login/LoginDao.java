@@ -32,6 +32,32 @@ public class LoginDao {
 		}
 		return status;
 	}
+	
+	public String getId(LoginBean loginBean) throws ClassNotFoundException {
+		String userId = "100";
+
+		Class.forName("com.mysql.jdbc.Driver");
+
+		try (Connection connection = DriverManager
+				.getConnection("jdbc:mysql://localhost:3306/project1", "root", "971228");
+
+				// Step 2:Create a statement using connection object
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("select customer_id from customer where customer_email = ?")) {
+			preparedStatement.setString(1, loginBean.getUsername());
+
+			System.out.println(preparedStatement);
+			ResultSet rs = preparedStatement.executeQuery();
+			rs.next();
+			userId = rs.getString(1);
+			System.out.println("User ID is"+userId);
+
+		} catch (SQLException e) {
+			// process sql exception
+			printSQLException(e);
+		}
+		return userId;
+	}
 
 	private void printSQLException(SQLException ex) {
 		for (Throwable e : ex) {

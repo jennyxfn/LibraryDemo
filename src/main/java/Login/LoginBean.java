@@ -6,16 +6,16 @@ public class LoginBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int userid;
+	private String userid;
 	private String username;
 	private String password;
 	private String usertype;
 	
 	public String getUserid() {
-		return username;
+		return userid;
 	}
 
-	public void setUserid(int userid) {
+	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 

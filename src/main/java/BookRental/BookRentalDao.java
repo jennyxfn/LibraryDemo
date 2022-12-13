@@ -1,4 +1,5 @@
 package BookRental;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 
 import BookRental.RentalBean;
 import BookRental.BookBean;
+
+import Login.LoginBean;
 
 public class BookRentalDao {
 	
@@ -31,8 +34,13 @@ public class BookRentalDao {
     //Needs to be changed to correct table
     private static final String DELETE_BOOKS_SQL = "delete from book where book_id = ?;";
     
-    //Needs to be changed to correct table
-    private static final String RENT_BOOKS_SQL = "";
+    //INSERT in rental table
+    private static final String RENT_BOOKS_SQL = "insert into rental "
+    		+ "values ((select max(rental_id) from rental)+1,'Borrowed',current_timestamp(),?,null,?,?)";
+    
+  //Update book status
+    private static final String UPDATE_BOOKS_SQL = "update book set book_status = 'NotA' "
+    		+ "where book_id = ?";
     		
     protected Connection getConnection() {
         Connection connection = null;
@@ -133,15 +141,22 @@ public class BookRentalDao {
     }
 	
 	//not finish
-	public boolean rentBook(BookBean book) throws SQLException {
+	public boolean rentBook(BookBean book, LoginBean user ) throws SQLException {
         boolean rowUpdated;
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(RENT_BOOKS_SQL);) {
-            statement.setString(1, book.getBkid());
-            statement.setString(2, book.getEmail());
-            statement.setString(3, book.getCountry());
-            statement.setInt(4, book.getId());
-
+        try (Connection connection = getConnection(); 
+        		PreparedStatement statement = connection.prepareStatement(RENT_BOOKS_SQL);
+        		PreparedStatement statement1 = connection.prepareStatement(UPDATE_BOOKS_SQL);) {
+        	//statement.setString(1, book.getBkid());// get from max(id) +1
+            statement.setString(1, "expected_returndate");//grab from user input in rental page
+            statement.setString(2, book.getBkid());
+            statement.setString(3, user.getUserid());
+            
+            statement1.setString(1, book.getBkid());
+            
+            statement1.executeUpdate();
             rowUpdated = statement.executeUpdate() > 0;
+            
+            
         }
         return rowUpdated;
     }

@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -56,6 +58,36 @@ public class SignInServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String action = request.getServletPath();
+		
+	    try {
+            switch (action) {
+                case "/Login2":
+                	valUser(request, response);
+                    break;
+//                case "/rent":
+//                	rentBook(request, response);
+//                    break;
+//                case "/delete":
+//                    deleteUser(request, response);
+//                    break;
+//                case "/edit":
+//                    showEditForm(request, response);
+//                    break;
+//                case "/update":
+//                    updateUser(request, response);
+//                    break;
+                default:
+                	valUser(request, response);
+                    break;
+            }
+        } catch (SQLException ex) {
+            throw new ServletException(ex);
+        }
+	}
+	
+	private void valUser(HttpServletRequest request, HttpServletResponse response)
+		    throws SQLException, IOException, ServletException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String usertype = request.getParameter("usertype");
@@ -70,9 +102,13 @@ public class SignInServlet extends HttpServlet {
 		
 		try {
 			if (loginDao.validate(loginBean)) {
-				//HttpSession session = request.getSession();
-				// session.setAttribute("username",username);
-				response.sendRedirect("main menu.html");
+
+				// pass LoginBean to main menu
+
+				loginBean.setUserid(loginDao.getId(loginBean));
+				request.setAttribute("loginBean", loginBean);
+				RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/main menu.jsp");
+				requestDispatcher.forward(request,response);
 				System.out.println("chengg");
 			} else {
 				HttpSession session = request.getSession();

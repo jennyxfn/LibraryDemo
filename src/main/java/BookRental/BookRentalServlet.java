@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -60,49 +61,91 @@ public class BookRentalServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String bkName = request.getParameter("bkName");
-		String bkAuthor = request.getParameter("bkAuthor");
-		String bkTopic = request.getParameter("bkTopic");
-		System.out.println("bkName is: "+ bkName);
-		System.out.println("bkAuthor is: "+ bkAuthor);
-		System.out.println("bkTopic is: "+ bkTopic);
+	    String action = request.getServletPath();
 		
-		RentalBean rentalBean = new RentalBean();
-		rentalBean.setBkName(bkName);
-		rentalBean.setBkAuthor(bkAuthor);
-		rentalBean.setBkTopic(bkTopic);
+	    try {
+            switch (action) {
+                case "/Book%20Rental":
+                	searchBook(request, response);
+                    break;
+                case "/rent":
+                	rentBook(request, response);
+                    break;
+                case "/main%20menu":
+                	searchBook(request, response);
+                    break;
+//                case "/edit":
+//                    showEditForm(request, response);
+//                    break;
+//                case "/update":
+//                    updateUser(request, response);
+//                    break;
+                default:
+                	searchBook(request, response);
+                    break;
+            }
+        } catch (SQLException ex) {
+            throw new ServletException(ex);
+        }
+    }
+		
+	private void rentBook(HttpServletRequest request, HttpServletResponse response)
+		    throws SQLException, IOException {
+		        int id = Integer.parseInt(request.getParameter("returndate"));
+		        
+//		        String name = request.getParameter("name");
+//		        String email = request.getParameter("email");
+//		        String country = request.getParameter("country");
+
+		        //User book = new User(id, name, email, country);
+		        bookRentalDao.rentBook(book,user);
+		        response.sendRedirect("main%20menu.jsp");
+		    }
 	
-		ArrayList Rows = new ArrayList();
-		try {
-			Rows = bookRentalDao.search(rentalBean);
+//	private void passBean(HttpServletRequest request, HttpServletResponse response)
+//		    throws SQLException, IOException {
+//		        int id = Integer.parseInt(request.getParameter("returndate"));
+//		        
+////		        String name = request.getParameter("name");
+////		        String email = request.getParameter("email");
+////		        String country = request.getParameter("country");
+//
+//		        //User book = new User(id, name, email, country);
+//		        bookRentalDao.rentBook(book,user);
+//		        response.sendRedirect("main%20menu.jsp");
+//		    }
+	
+	private void searchBook(HttpServletRequest request, HttpServletResponse response)
+		    throws SQLException, IOException, ServletException {
+				// TODO Auto-generated method stub
+				LoginBean loginBean = (LoginBean)request.getAttribute("loginBean");
+				System.out.println("UserID is: "+ loginBean.getUserid());
+				
+				String bkName = request.getParameter("bkName");
+				String bkAuthor = request.getParameter("bkAuthor");
+				String bkTopic = request.getParameter("bkTopic");
+
+				
+				RentalBean rentalBean = new RentalBean();
+				rentalBean.setBkName(bkName);
+				rentalBean.setBkAuthor(bkAuthor);
+				rentalBean.setBkTopic(bkTopic);
 			
-			System.out.println(Rows);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		request.setAttribute("Rows", Rows);
-		RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/BookDetail.jsp");
-		requestDispatcher.forward(request,response);
-		//request.getRequestDispatcher("BookDetail.jsp").forward(request, response); 
-		
-//		try {
-//			if (bookRentalDao.search(rentalBean)) {
-//				//HttpSession session = request.getSession();
-//				// session.setAttribute("username",username);
-//				response.sendRedirect("main menu.html");
-//				System.out.println("chengg");
-//			} else {
-//				HttpSession session = request.getSession();
-//				System.out.println("ShiBai");
-//				//session.setAttribute("user", username);
-//				//response.sendRedirect("login.jsp");
-//			}
-//		} catch (ClassNotFoundException e) {
-//			e.printStackTrace();
-//		}
-	}
+				ArrayList Rows = new ArrayList();
+				try {
+					Rows = bookRentalDao.search(rentalBean);
+					
+					System.out.println(Rows);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				request.setAttribute("Rows", Rows);
+				//RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/BookDetail.jsp");
+				RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/BookDetailNew.jsp");
+				requestDispatcher.forward(request,response);
+
+			}
 
 }
