@@ -25,7 +25,7 @@ public class LoginDao {
 			System.out.println(preparedStatement);
 			ResultSet rs = preparedStatement.executeQuery();
 			status = rs.next();
-
+			connection.close();
 		} catch (SQLException e) {
 			// process sql exception
 			printSQLException(e);
@@ -51,6 +51,7 @@ public class LoginDao {
 			rs.next();
 			userId = rs.getString(1);
 			System.out.println("User ID is"+userId);
+			connection.close();
 
 		} catch (SQLException e) {
 			// process sql exception

@@ -23,7 +23,7 @@ import BookRental.BookRentalDao;
 /**
  * Servlet implementation class Servlet1
  */
-@WebServlet("/BookRentalServlet")
+@WebServlet("/")
 public class BookRentalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BookRentalDao bookRentalDao;  
@@ -65,14 +65,17 @@ public class BookRentalServlet extends HttpServlet {
 		
 	    try {
             switch (action) {
-                case "/Book%20Rental":
+                case "/BookRental":
                 	searchBook(request, response);
+                	System.out.println("from book rental");
                     break;
                 case "/rent":
                 	rentBook(request, response);
+                	System.out.println("from rent");
                     break;
                 case "/main%20menu":
                 	searchBook(request, response);
+                	System.out.println("from main menu");
                     break;
 //                case "/edit":
 //                    showEditForm(request, response);
@@ -82,8 +85,10 @@ public class BookRentalServlet extends HttpServlet {
 //                    break;
                 default:
                 	searchBook(request, response);
+                	System.out.println("from default");
+                	System.out.println(action);
                     break;
-            }
+                    }
         } catch (SQLException ex) {
             throw new ServletException(ex);
         }
@@ -91,9 +96,7 @@ public class BookRentalServlet extends HttpServlet {
 		
 	private void rentBook(HttpServletRequest request, HttpServletResponse response)
 		    throws SQLException, IOException {
-<<<<<<< HEAD
 				String returnDate = request.getParameter("returndate");
-<<<<<<< HEAD
 		        String bookId = request.getParameter("bkId");
 				String userId = request.getParameter("userId");
 				String userType = request.getParameter("userType");
@@ -101,44 +104,19 @@ public class BookRentalServlet extends HttpServlet {
 				System.out.println("data in query listed below: ");
 				System.out.println(returnDate + "; "+bookId+ "; "+userId+"; "+userType);
 				
-=======
-		        int id = Integer.parseInt(request.getParameter("returndate"));
-		        
-//		        String name = request.getParameter("name");
-//		        String email = request.getParameter("email");
-//		        String country = request.getParameter("country");
->>>>>>> parent of de89cb1 (able to pass userid to anywhere)
-=======
-		        String bookId = request.getParameter("BookId");
-				String userId = request.getParameter("UserId");
-				String userType = request.getParameter("UserType");
-		       
->>>>>>> parent of dbee788 (Rent function done)
-
-		        //User book = new User(id, name, email, country);
-		        bookRentalDao.rentBook(book,user);
+		        bookRentalDao.rentBook(returnDate, bookId, userId);
 		        response.sendRedirect("main%20menu.jsp");
 		    }
-	
-//	private void passBean(HttpServletRequest request, HttpServletResponse response)
-//		    throws SQLException, IOException {
-//		        int id = Integer.parseInt(request.getParameter("returndate"));
-//		        
-////		        String name = request.getParameter("name");
-////		        String email = request.getParameter("email");
-////		        String country = request.getParameter("country");
-//
-//		        //User book = new User(id, name, email, country);
-//		        bookRentalDao.rentBook(book,user);
-//		        response.sendRedirect("main%20menu.jsp");
-//		    }
 	
 	private void searchBook(HttpServletRequest request, HttpServletResponse response)
 		    throws SQLException, IOException, ServletException {
 				// TODO Auto-generated method stub
-				LoginBean loginBean = (LoginBean)request.getAttribute("loginBean");
-				System.out.println("UserID is: "+ loginBean.getUserid());
+				String userId = request.getParameter("UserId");
+				String userType = request.getParameter("UserType");
 				
+				System.out.println("decomposed userId is: "+userId);
+				System.out.println("decomposed userType is: "+userType);
+
 				String bkName = request.getParameter("bkName");
 				String bkAuthor = request.getParameter("bkAuthor");
 				String bkTopic = request.getParameter("bkTopic");
@@ -160,6 +138,8 @@ public class BookRentalServlet extends HttpServlet {
 				}
 				
 				request.setAttribute("Rows", Rows);
+				request.setAttribute("userId", userId);
+				request.setAttribute("userType", userType);
 				//RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/BookDetail.jsp");
 				RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/BookDetailNew.jsp");
 				requestDispatcher.forward(request,response);
