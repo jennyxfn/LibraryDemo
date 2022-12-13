@@ -19,6 +19,7 @@
     <%
     LoginBean loginBean = (LoginBean)session.getAttribute("loginBean");
     //out.print(loginBean.getUserid());
+    System.out.println("Data pass to BookRental success! Userid is "+loginBean.getUserid());
     
     %>
     <%session.setAttribute("loginBean", loginBean); %>
@@ -27,13 +28,15 @@
     	<input class="unbook" type="text" name="bkName" align="center" placeholder="Book Name">
     	<input class="unbook" type="text" name="bkAuthor" align="center" placeholder="Author">
     	<input class="unbook" type="text" name="bkTopic" align="center" placeholder="Topic">
+    	<input type="hidden" name="UserId" value="${loginBean.getUserid()}" />
+    	<input type="hidden" name="UserType" value="${loginBean.getUsertype()}" />
     	<button class="submitbook" align="center">Submit</button>
     	<br/>
     	<br/>
     	
     </form>
     <form>
-    
+    	<%request.setAttribute("loginBean", loginBean); %>
     	<button class="backbook" formaction="main menu.jsp" align="center">Back</button>
     
     </form>          

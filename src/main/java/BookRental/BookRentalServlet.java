@@ -67,12 +67,15 @@ public class BookRentalServlet extends HttpServlet {
             switch (action) {
                 case "/Book%20Rental":
                 	searchBook(request, response);
+                	System.out.println("from book rental");
                     break;
                 case "/rent":
                 	rentBook(request, response);
+                	System.out.println("from rent");
                     break;
                 case "/main%20menu":
                 	searchBook(request, response);
+                	System.out.println("from main menu");
                     break;
 //                case "/edit":
 //                    showEditForm(request, response);
@@ -82,6 +85,8 @@ public class BookRentalServlet extends HttpServlet {
 //                    break;
                 default:
                 	searchBook(request, response);
+                	System.out.println("from default");
+                	System.out.println(action);
                     break;
             }
         } catch (SQLException ex) {
@@ -91,14 +96,14 @@ public class BookRentalServlet extends HttpServlet {
 		
 	private void rentBook(HttpServletRequest request, HttpServletResponse response)
 		    throws SQLException, IOException {
-		        int id = Integer.parseInt(request.getParameter("returndate"));
-		        
-//		        String name = request.getParameter("name");
-//		        String email = request.getParameter("email");
-//		        String country = request.getParameter("country");
+				String returnDate = request.getParameter("returndate");
+		        String bookId = request.getParameter("BookId");
+				String userId = request.getParameter("UserId");
+				String userType = request.getParameter("UserType");
+		       
 
 		        //User book = new User(id, name, email, country);
-		        bookRentalDao.rentBook(book,user);
+		        bookRentalDao.rentBook(returnDate, bookId, userId);
 		        response.sendRedirect("main%20menu.jsp");
 		    }
 	
@@ -118,9 +123,15 @@ public class BookRentalServlet extends HttpServlet {
 	private void searchBook(HttpServletRequest request, HttpServletResponse response)
 		    throws SQLException, IOException, ServletException {
 				// TODO Auto-generated method stub
-				LoginBean loginBean = (LoginBean)request.getAttribute("loginBean");
-				System.out.println("UserID is: "+ loginBean.getUserid());
+				//LoginBean loginBean = (LoginBean)request.getAttribute("loginBean");
+				//System.out.println("UserID is: "+ loginBean.getUserid());
+				//LoginBean loginbean = request.getParameter("loginBean");
+				String userId = request.getParameter("UserId");
+				String userType = request.getParameter("UserType");
 				
+				System.out.println("decomposed userId is: "+userId);
+				System.out.println("decomposed userType is: "+userType);
+
 				String bkName = request.getParameter("bkName");
 				String bkAuthor = request.getParameter("bkAuthor");
 				String bkTopic = request.getParameter("bkTopic");
@@ -142,6 +153,8 @@ public class BookRentalServlet extends HttpServlet {
 				}
 				
 				request.setAttribute("Rows", Rows);
+				request.setAttribute("userId", userId);
+				request.setAttribute("userType", userType);
 				//RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/BookDetail.jsp");
 				RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/BookDetailNew.jsp");
 				requestDispatcher.forward(request,response);
