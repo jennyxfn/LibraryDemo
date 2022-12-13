@@ -62,13 +62,8 @@
 						<%@ page import = "BookRental.BookBean"%>
                         <% 	
 						   		ArrayList<BookBean> Rows = new ArrayList();
-								
+						   		//rows = (ArrayList)request.getAttribute("Rows");
 						   		Rows = (ArrayList)request.getAttribute("Rows");
-						   		String userId = (String)request.getAttribute("userId");
-						   		String userType = (String)request.getAttribute("userType");
-						   		
-						   		System.out.println("userId transferred to BookDetail success, it is: "+userId);
-								System.out.println("userType transferred to BookDetail success, it is: "+userType);
 						%>
 						
                         <tbody>
@@ -90,7 +85,7 @@
                                     <td>
                                         <c:out value="${book.getBkstatus()}" />
                                     </td>
-                                    <td><a href="rent.jsp?bkid=<c:out value='${book.getBkid()}' />&userId=<c:out value='${userId}' />&userType=<c:out value='${userType}' />">Rent</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="return.jsp?id=<c:out value='${book.getBkid()}' />">Return</a></td>
+                                    <td><a href="rent.jsp?id=<c:out value='${book.getBkid()}' />">Rent</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="return.jsp?id=<c:out value='${book.getBkid()}' />">Return</a></td>
                                 </tr>
                             </c:forEach>
                             <!-- } -->

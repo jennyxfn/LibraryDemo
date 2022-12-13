@@ -141,21 +141,21 @@ public class BookRentalDao {
     }
 	
 	//not finish
-	public boolean rentBook(String returnDate, String bkId, String userId) throws SQLException {
+	public boolean rentBook(BookBean book, LoginBean user ) throws SQLException {
         boolean rowUpdated;
         try (Connection connection = getConnection(); 
         		PreparedStatement statement = connection.prepareStatement(RENT_BOOKS_SQL);
         		PreparedStatement statement1 = connection.prepareStatement(UPDATE_BOOKS_SQL);) {
         	//statement.setString(1, book.getBkid());// get from max(id) +1
-            statement.setString(1, returnDate);//grab from user input in rental page
-            statement.setString(2, bkId);
-            statement.setString(3, userId);
+            statement.setString(1, "expected_returndate");//grab from user input in rental page
+            statement.setString(2, book.getBkid());
+            statement.setString(3, user.getUserid());
             
-            statement1.setString(1, bkId);
+            statement1.setString(1, book.getBkid());
             
             statement1.executeUpdate();
             rowUpdated = statement.executeUpdate() > 0;
-            System.out.println("sql pao le");
+            
             
         }
         return rowUpdated;
